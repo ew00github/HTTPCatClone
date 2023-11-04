@@ -2,7 +2,6 @@ package com.evan.HTTPCatClone.web;
 
 import com.evan.HTTPCatClone.model.HttpStatus;
 import com.evan.HTTPCatClone.service.HttpStatusService;
-import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ public class HttpStatusController {
     private final HttpStatusService httpStatusService;
 
     public HttpStatusController(HttpStatusService httpStatusService) {
-        this.HttpStatusService = httpStatusService;
+        this.httpStatusService = httpStatusService;
     }
 
     @GetMapping("/")
@@ -29,8 +28,8 @@ public class HttpStatusController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<byte[]> download(@PathVariable Long id){
-        HttpStatus httpStatus = HttpStatusService.getById(id);
+    public ResponseEntity<byte[]> getFromDBID(@PathVariable Long id){
+        HttpStatus httpStatus = httpStatusService.getById(id);
         if (httpStatus == null) throw new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
         byte[] image = httpStatus.getImage();
         HttpHeaders headers = new HttpHeaders();
@@ -39,10 +38,10 @@ public class HttpStatusController {
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<byte[]> download(@PathVariable String status){
-        HttpStatus httpStatus = HttpStatusService.getByStatus(status);
+    public ResponseEntity<byte[]> getFromDBStatus(@PathVariable String status){
+        HttpStatus httpStatus = httpStatusService.getByStatus(status);
         if (httpStatus == null) {
-        httpStatus = HttpStatusService.getByStatus("404");
+        httpStatus = httpStatusService.getByStatus("404");
         }
         byte[] image = httpStatus.getImage();
         HttpHeaders headers = new HttpHeaders();
@@ -52,7 +51,7 @@ public class HttpStatusController {
 
     @PostMapping("/save")
     public HttpStatus save(@RequestBody HttpStatus httpStatus) {
-        return HttpStatusService.save(httpStatus);
+        return httpStatusService.save(httpStatus);
     }
 }
 
