@@ -46,5 +46,7 @@ public class HttpStatusService {
 
 
     }
-
+    public HttpStatus save(HttpStatus httpStatus) {
+        return httpStatusRepository.save(httpStatus);
+    }
 }

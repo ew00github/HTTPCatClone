@@ -48,6 +48,9 @@ public class HttpStatusController {
 
 
 
-
+    @PostMapping("/save")
+    public HttpStatus save(@RequestBody HttpStatus httpStatus) {
+        return HttpStatusService.save(httpStatus);
+    }
 
 }
