@@ -4,7 +4,6 @@ import com.evan.HTTPCatClone.model.HttpStatus;
 import com.evan.HTTPCatClone.repository.HttpStatusRepository;
 import com.evan.HTTPCatClone.tools.JSONConverter;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +17,6 @@ public class HttpStatusService {
 
 
     }
-
 
     public HttpStatus getById(Long id) {
         return httpStatusRepository.findById(id).orElse(null);
@@ -35,18 +33,16 @@ public class HttpStatusService {
 
     }
 
-
-
     public void saveAll() {
-
-
         if (httpStatusRepository.count() == 0){
             httpStatusRepository.saveAll(get());
         }
-
-
     }
+
     public HttpStatus getByStatus(String status){
         return httpStatusRepository.findByStatus(status);
+    }
+    public HttpStatus save(HttpStatus httpStatus) {
+        return httpStatusRepository.save(httpStatus);
     }
 }

@@ -57,4 +57,10 @@ public class HttpStatusController {
         return new ResponseEntity<>(image, headers, org.springframework.http.HttpStatus.OK);
     }
 
+    @PostMapping("/save")
+    public HttpStatus save(@RequestBody HttpStatus httpStatus) {
+        return HttpStatusService.save(httpStatus);
+    }
+
 }
+
