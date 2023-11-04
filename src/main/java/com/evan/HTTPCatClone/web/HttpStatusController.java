@@ -9,30 +9,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @RestController
 public class HttpStatusController {
 
-
-    private final HttpStatusService HttpStatusService;
+    private final HttpStatusService httpStatusService;
 
     public HttpStatusController(HttpStatusService httpStatusService) {
         this.HttpStatusService = httpStatusService;
     }
 
     @GetMapping("/")
-    public Iterable<HttpStatus> getAllStatuses() {
-        return HttpStatusService.get();
-
+    public Iterable<HttpStatus> getAllStatuses(){
+        return httpStatusService.getAll();
     }
 
     @GetMapping("/status/test")
     public String test() {
-
-
         return "Hello world!";
-
-
     }
 
     @GetMapping("/id/{id}")
@@ -61,6 +54,5 @@ public class HttpStatusController {
     public HttpStatus save(@RequestBody HttpStatus httpStatus) {
         return HttpStatusService.save(httpStatus);
     }
-
 }
 
