@@ -19,6 +19,12 @@ public class HttpStatusService {
         return httpStatusRepository.findAll();
     }
 
+    public void saveAll() {
+        if (httpStatusRepository.count() == 0){
+            httpStatusRepository.saveAll(getAll());
+        }
+    }
+  
     public HttpStatus save(HttpStatus httpStatus) {
         return httpStatusRepository.save(httpStatus);
     }
