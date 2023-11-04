@@ -20,7 +20,7 @@ public class HttpStatusService {
     }
 
 
-    public HttpStatus get(Long id) {
+    public HttpStatus getById(Long id) {
         return httpStatusRepository.findById(id).orElse(null);
     }
 
@@ -46,5 +46,7 @@ public class HttpStatusService {
 
 
     }
-
+    public HttpStatus getByStatus(String status){
+        return httpStatusRepository.findByStatus(status);
+    }
 }
