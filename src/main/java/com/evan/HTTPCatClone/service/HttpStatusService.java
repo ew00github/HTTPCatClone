@@ -26,4 +26,14 @@ public class HttpStatusService {
             throw new RuntimeException(e);
         }
     }
+
+    public void saveAll() {
+        if (httpStatusRepository.count() == 0){
+            httpStatusRepository.saveAll(get());
+        }
+    }
+  
+    public HttpStatus save(HttpStatus httpStatus) {
+        return httpStatusRepository.save(httpStatus);
+    }
 }
