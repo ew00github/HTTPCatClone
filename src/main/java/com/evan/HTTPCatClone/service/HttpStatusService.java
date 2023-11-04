@@ -18,4 +18,9 @@ public class HttpStatusService {
     public Iterable<HttpStatus> getAll() {
         return httpStatusRepository.findAll();
     }
+
+    public HttpStatus save(HttpStatus httpStatus) {
+        return httpStatusRepository.save(httpStatus);
+    }
+
 }
