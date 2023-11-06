@@ -19,9 +19,9 @@ public class WebService {
         this.webClient = webClient;
     }
 
-    public Mono<ResponseEntity<byte[]>> getStatusFromCat(String status_code) {
+    public Mono<ResponseEntity<byte[]>> getStatusFromCat(String statusCode) {
         Mono<byte[]> imageBytes =  webClient.get()
-                .uri("https://http.cat/" + status_code)
+                .uri("https://http.cat/" + statusCode)
                 .retrieve()
                 .bodyToMono(byte[].class);
         return imageBytes.map(catImage -> {

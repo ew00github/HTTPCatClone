@@ -16,8 +16,8 @@ public class WebController {
         this.webService = webService;
     }
 
-    @GetMapping("/catAPI/status/{status_code}")
-    public Mono<ResponseEntity<byte[]>> getStatusFromCat(@PathVariable String status_code){
-        return this.webService.getStatusFromCat(status_code);
+    @GetMapping("/catAPI/status/{statusCode}")
+    public Mono<ResponseEntity<byte[]>> getStatusFromCat(@PathVariable String statusCode){
+        return this.webService.getStatusFromCat(statusCode);
     }
 }
