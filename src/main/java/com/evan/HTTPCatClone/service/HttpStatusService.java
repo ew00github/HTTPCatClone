@@ -3,8 +3,6 @@ package com.evan.HTTPCatClone.service;
 import com.evan.HTTPCatClone.model.HttpStatus;
 import com.evan.HTTPCatClone.repository.HttpStatusRepository;
 import org.springframework.stereotype.Service;
-import java.io.IOException;
-import java.util.List;
 
 @Service
 public class HttpStatusService {
@@ -19,7 +17,6 @@ public class HttpStatusService {
     
     public HttpStatus getByStatus(String status){
         return httpStatusRepository.findByStatus(status);
-
     }
     
     public Iterable<HttpStatus> getAll() {
