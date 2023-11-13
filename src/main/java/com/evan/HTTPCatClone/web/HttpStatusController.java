@@ -2,18 +2,20 @@ package com.evan.HTTPCatClone.web;
 
 import com.evan.HTTPCatClone.model.HttpStatus;
 import com.evan.HTTPCatClone.service.HttpStatusService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class HttpStatusController {
 
     private final HttpStatusService httpStatusService;
 
+    @Autowired
     public HttpStatusController(HttpStatusService httpStatusService) {
         this.httpStatusService = httpStatusService;
     }
@@ -51,19 +53,8 @@ public class HttpStatusController {
     }
 
     @GetMapping("/statusGroup/{status}")
-    public ArrayList<String> getStatusGroup(@PathVariable String status){
-        ArrayList<String> statusGroup = new ArrayList<>();
-        if (!(status.equals("100") || status.equals("200") || status.equals("300") || status.equals("400") || status.equals("500"))){
-            throw new ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST);
-        }
-        int upperBound = Integer.parseInt(status) + 99;
-        for (int i = Integer.parseInt(status); i < upperBound; i++){
-            HttpStatus httpStatus = httpStatusService.getByStatus(String.valueOf(i));
-            if ((httpStatus != null && httpStatus.getStatus() != null)){
-                statusGroup.add(httpStatusService.getByStatus(String.valueOf(i)).getStatus());
-            }
-        }
-        return statusGroup;
+    public List<HttpStatus> getStatusGroup(@PathVariable String status){
+        return httpStatusService.getStatusGroup(status);
     }
 
     @PostMapping("/save")
