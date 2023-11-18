@@ -2,17 +2,20 @@ package com.evan.HTTPCatClone.web;
 
 import com.evan.HTTPCatClone.model.HttpStatus;
 import com.evan.HTTPCatClone.service.HttpStatusService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import java.util.List;
 
 @RestController
 public class HttpStatusController {
 
     private final HttpStatusService httpStatusService;
 
+    @Autowired
     public HttpStatusController(HttpStatusService httpStatusService) {
         this.httpStatusService = httpStatusService;
     }
@@ -47,6 +50,11 @@ public class HttpStatusController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(image, headers, org.springframework.http.HttpStatus.OK);
+    }
+
+    @GetMapping("/statusGroup/{status}")
+    public List<HttpStatus> getStatusGroup(@PathVariable String status){
+        return httpStatusService.getStatusGroup(status);
     }
 
     @PostMapping("/save")
