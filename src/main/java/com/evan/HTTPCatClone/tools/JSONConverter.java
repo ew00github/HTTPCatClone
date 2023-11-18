@@ -15,7 +15,6 @@ public class JSONConverter {
         File file = new File("src/main/resources/static/data.json");
         TypeReference<List<HttpStatus>> typeReference = new TypeReference<>() {
         };
-
         return objectMapper.readValue(file, typeReference);
     }
 }

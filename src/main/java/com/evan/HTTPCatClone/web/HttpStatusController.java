@@ -31,7 +31,7 @@ public class HttpStatusController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<byte[]> download(@PathVariable Long id){
+    public ResponseEntity<byte[]> getFromDBID(@PathVariable Long id){
         HttpStatus httpStatus = httpStatusService.getById(id);
         if (httpStatus == null) throw new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
         byte[] image = httpStatus.getImage();
@@ -41,7 +41,7 @@ public class HttpStatusController {
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<byte[]> download(@PathVariable String status){
+    public ResponseEntity<byte[]> getFromDBStatus(@PathVariable String status){
         HttpStatus httpStatus = httpStatusService.getByStatus(status);
         if (httpStatus == null) {
         httpStatus = httpStatusService.getByStatus("404");
