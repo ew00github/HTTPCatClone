@@ -1,7 +1,5 @@
 package com.evan.HTTPCatClone.web;
 
-
-import com.evan.HTTPCatClone.model.HttpStatus;
 import com.evan.HTTPCatClone.service.WebService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +19,5 @@ public class WebController {
     @GetMapping("/catAPI/status/{statusCode}")
     public Mono<ResponseEntity<byte[]>> getStatusFromCat(@PathVariable String statusCode){
         return this.webService.getStatusFromCat(statusCode);
-    }
-
-    @GetMapping("/catAPI/sendHttpStatus/id/{id}")
-    public Mono<ResponseEntity<HttpStatus>> sendHttpStatusFromId(@PathVariable Long id){
-        return this.webService.sendHttpStatusFromId(id);
     }
 }

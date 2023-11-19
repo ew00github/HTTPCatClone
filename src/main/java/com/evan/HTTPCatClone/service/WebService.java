@@ -34,12 +34,7 @@ public class WebService {
         });
     }
 
-    public Mono<ResponseEntity<HttpStatus>> sendHttpStatusFromId(Long id){
-        HttpStatus httpStatus = statusService.getById(id);
-        if (httpStatus != null){
-            return Mono.just(ResponseEntity.ok(httpStatus));
-        } else {
-            return Mono.just(ResponseEntity.notFound().build());
-        }
+    public HttpStatus getHttpStatusById(Long id) {
+        return statusService.getById(id);
     }
 }
