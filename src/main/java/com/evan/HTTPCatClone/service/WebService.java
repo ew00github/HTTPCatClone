@@ -1,13 +1,12 @@
 package com.evan.HTTPCatClone.service;
 
-
+import com.evan.HTTPCatClone.model.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -35,24 +34,12 @@ public class WebService {
         });
     }
 
-    public ResponseEntity<byte[]> sendImageFromId(Long id){
-        byte[] imageBytes = statusService.getById(id).getImage();
-        if(imageBytes == null) throw new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(imageBytes, headers, org.springframework.http.HttpStatus.OK);
-    }
-
-    public ResponseEntity<byte[]> sendImageFromStatus(String status){
-        byte[] imageBytes = statusService.getByStatus(status).getImage();
-        if(imageBytes == null) throw new ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(imageBytes, headers, org.springframework.http.HttpStatus.OK);
-    }
-
-    public Mono<String> sendStatusFromId(Long id){
-        String statusCode = statusService.getById(id).getStatus();
-        return Mono.just(statusCode);
+    public Mono<ResponseEntity<HttpStatus>> sendHttpStatusFromId(Long id){
+        HttpStatus httpStatus = statusService.getById(id);
+        if (httpStatus != null){
+            return Mono.just(ResponseEntity.ok(httpStatus));
+        } else {
+            return Mono.just(ResponseEntity.notFound().build());
+        }
     }
 }
