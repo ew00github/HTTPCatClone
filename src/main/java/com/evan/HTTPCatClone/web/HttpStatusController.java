@@ -61,5 +61,10 @@ public class HttpStatusController {
     public HttpStatus save(@RequestBody HttpStatus httpStatus) {
         return httpStatusService.save(httpStatus);
     }
+
+    @GetMapping("/catAPI/sendHttpStatus/id/{id}")
+    public HttpStatus getHttpStatusById(@PathVariable Long id){
+        return httpStatusService.getById(id);
+    }
 }
 

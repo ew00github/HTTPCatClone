@@ -12,7 +12,7 @@ public class WebController {
 
     private final WebService webService;
 
-    public WebController(WebService webService){
+    public WebController(WebService webService) {
         this.webService = webService;
     }
 
