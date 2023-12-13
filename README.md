@@ -1,5 +1,5 @@
 HTTPCatClone is an Remote Procedure Call (RPC) API that aims to recreate the backend of the website [http.cat](https://http.cat). 
-
+Companion app: https://github.com/ew00github/HTTPCatCloneEmailer
 
 
 HTTPCatClone works by populating an in-memory H2 database via a JSON file (data.json) containing HTTP status codes as strings and base64-encoded images from the http.cat website.
